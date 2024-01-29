@@ -526,10 +526,10 @@ def main_menu(window):
 
 
 class Env:
-    # def __init__(self, window):
-    def __init__(self):
+    def __init__(self, window):
+    # def __init__(self):
 
-        # self.window = window
+        self.window = window
 
         self.locked_positions = {}
 
@@ -704,9 +704,9 @@ class Env:
             if self.last_score < self.score:
                 self.last_score = self.score
 
-        # draw_window(self.window, grid, self.score, self.last_score)
-        # draw_next_shape(self.next_piece, self.window)
-        # pygame.display.update()
+        draw_window(self.window, grid, self.score, self.last_score)
+        draw_next_shape(self.next_piece, self.window)
+        pygame.display.update()
 
         next_state_matrix = self.get_current_state(grid)
 
@@ -800,11 +800,11 @@ state_shape = (22, 10, 1)
 action_size = 5  # 'left', 'right', 'down', 'up', 'nothing'
 
 if __name__ == '__main__':
-    # win = pygame.display.set_mode((s_width, s_height))
-    # pygame.display.set_caption('Tetris')
+    win = pygame.display.set_mode((s_width, s_height))
+    pygame.display.set_caption('Tetris')
     agent = DQNAgent(state_size=state_shape, action_size=action_size)
-    # env = Env(win)
-    env = Env()
+    env = Env(win)
+    # env = Env()
     num_episodes = 200
     total_rewards_arr = []
     for episode in range(num_episodes):
@@ -825,18 +825,3 @@ if __name__ == '__main__':
 
     agent.model.save('trained_model2.h5')
     print(total_rewards_arr)
-    # env.step('down')
-    # env.step('left')
-    # for i in range(20):
-    #     env.step('up')
-    #     time.sleep(0.3)
-    #     env.step('right')
-    #     env.step('down')
-    #
-    # env.reset()
-    # for i in range(20):
-    #     env.step('up')
-    #     time.sleep(0.3)
-    #     env.step('left')
-    #     env.step('down')
-    # main_menu(win)  # start game
